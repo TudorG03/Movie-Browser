@@ -357,11 +357,11 @@ function RandomMovie() {
 export default function Home() {
   const [iconicMovies, setIconicMovies] = useState([]);
   const url =
-    "https://api.themoviedb.org/3/movie/top_rated/?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      setIconicMovies(data.results.slice(0, 10));
+      setIconicMovies(data.results);
     });
 
   const [loading, setLoading] = useState(false);
@@ -380,6 +380,12 @@ export default function Home() {
         <div className="container-fluid">
           <div className="row">
             <HeroCarousel iconicMovies={iconicMovies} />
+            <div className="home-hero m-5">
+              <h1>Welcome.</h1>
+              <p className="lead">
+                Millions of movies to discover. Explore now.
+              </p>
+            </div>
           </div>
           <div className="row">
             <div className="container">
