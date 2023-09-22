@@ -357,11 +357,11 @@ function RandomMovie() {
 export default function Home() {
   const [iconicMovies, setIconicMovies] = useState([]);
   const url =
-    "https://api.themoviedb.org/3/movie/550/?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
+    "https://api.themoviedb.org/3/movie/top_rated/?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      setIconicMovies(data.results);
+      setIconicMovies(data.results.slice(0, 10));
     });
 
   const [loading, setLoading] = useState(false);
