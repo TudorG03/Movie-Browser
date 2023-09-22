@@ -97,12 +97,12 @@ header {
   );
 }
 
-.home-hero {
+/* .home-hero {
   left: 10%;
   position: absolute;
   z-index: 200;
   color: #fff;
-}
+} */
 
 .hr {
   height: 1px;
