@@ -386,6 +386,7 @@ export default function Home() {
                 Millions of movies to discover. Explore now.
               </p>
             </div>
+            
           </div>
           <div className="row">
             <div className="container">
