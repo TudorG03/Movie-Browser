@@ -357,7 +357,7 @@ function RandomMovie() {
 export default function Home() {
   const [iconicMovies, setIconicMovies] = useState([]);
   const url =
-    "https://api.themoviedb.org/3/movie/popular?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
+    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&api_key=79b6766f2960d692019a0072eacfd852";
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -386,7 +386,6 @@ export default function Home() {
                 Millions of movies to discover. Explore now.
               </p>
             </div>
-            
           </div>
           <div className="row">
             <div className="container">
