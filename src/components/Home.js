@@ -380,12 +380,7 @@ export default function Home() {
         <div className="container-fluid">
           <div className="row">
             <HeroCarousel iconicMovies={iconicMovies} />
-            <div className="home-hero m-5">
-              <h1>Welcome.</h1>
-              <p className="lead">
-                Millions of movies to discover. Explore now.
-              </p>
-            </div>
+            
           </div>
           <div className="row">
             <div className="container">
