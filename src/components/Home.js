@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Carousel } from "react-bootstrap";
+import React, { useState, useEffect, useRef } from "react";
+import { Carousel, Button, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { BounceLoader } from "react-spinners";
@@ -38,16 +38,18 @@ function Card({ movie, orientation, updateBg }) {
   const [trailerKey, setTrailerKey] = useState("");
 
   if (orientation === "backdrop_path") {
-    fetch(
-      urlVideo
-    )
+    fetch(urlVideo)
       .then((response) => response.json())
       .then((data) => {
-        setTrailerKey(data.results[0].key)
+        setTrailerKey(data.results[0].key);
       })
-      .catch((err) => {console.log(err)});
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  const ytUrl = trailerKey ? `https://www.youtube.com/watch?v=${trailerKey}` : "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
+  const ytUrl = trailerKey
+    ? `https://www.youtube.com/watch?v=${trailerKey}`
+    : "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
 
   const location =
     orientation === "poster_path" ? `/movies/${movie.id}` : ytUrl;
@@ -135,9 +137,39 @@ function TrendingCarousel({ orientation, movieList }) {
     paddingTop: orientation === "backdrop_path" && "5em",
   };
 
+  const ref = useRef(null);
+
+  const onPrevClick = () => {
+    ref.current.prev();
+  };
+  const onNextClick = () => {
+    ref.current.next();
+  };
+
   return (
-    <div style={customBg} className="trailers-container">
-      <Carousel indicators={false} controls={true} className="p-5">
+    <div style={customBg} className="trailers-container position-relative">
+      <Container
+        className="position-absolute"
+        style={{ zIndex: "1000", top: "50%" }}
+      >
+        <Row className="position-relative">
+          <Button
+            variant="primary"
+            onClick={onPrevClick}
+            style={{ position: "absolute", left: "0", borderRadius: "100px" }}
+          >
+            <p style={{ fontWeight: "900", margin: ".5em" }}>{"<"}</p>
+          </Button>
+          <Button
+            variant="primary"
+            onClick={onNextClick}
+            style={{ position: "absolute", right: "0", fontWeight: "900", borderRadius: "100px" }}
+          >
+            <p style={{ fontWeight: "900", margin: ".5em" }}>{">"}</p>
+          </Button>
+        </Row>
+      </Container>
+      <Carousel indicators={false} controls={false} className="p-5" ref={ref}>
         {trendingMovies.reduce(reduceMovies, []).map((item, index) => (
           <Carousel.Item key={index}>
             <div className="d-flex justify-content-center">
@@ -238,7 +270,9 @@ function RandomMovie() {
     genres.push("unknown");
   }
 
-  const backdropUrl = randomMovie.backdrop_path ? `https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}` : "";
+  const backdropUrl = randomMovie.backdrop_path
+    ? `https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`
+    : "";
 
   return (
     <div className="container">
@@ -250,7 +284,10 @@ function RandomMovie() {
         Surprise me
       </button>
       {loading ? (
-        <div className="container d-flex justify-content-center align-items-center" style={{height: "10em"}}>
+        <div
+          className="container d-flex justify-content-center align-items-center"
+          style={{ height: "10em" }}
+        >
           <BounceLoader color={"#fff"} size={50} />
         </div>
       ) : (
@@ -280,12 +317,15 @@ function RandomMovie() {
                     alt="..."
                   />
                 </div>
-                <div className="col-md-9 my-5 p-4" style={{
-                  backgroundImage: `linear-gradient(rgba(70,70,70,.6), rgba(70,70,70,.6)), url(${backdropUrl})`,
-                  backgroundPosition: "center center",
-                  backgroundSize: "cover",
-                  borderRadius: "15px",
-                }}>
+                <div
+                  className="col-md-9 my-5 p-4"
+                  style={{
+                    backgroundImage: `linear-gradient(rgba(70,70,70,.6), rgba(70,70,70,.6)), url(${backdropUrl})`,
+                    backgroundPosition: "center center",
+                    backgroundSize: "cover",
+                    borderRadius: "15px",
+                  }}
+                >
                   <h2 className="mb-4">{randomMovie.original_title}</h2>
                   <p className="lead">
                     <span className="h3">Genres: </span>
