@@ -113,7 +113,37 @@ function TrendingCarousel({ orientation, movieList }) {
       });
   }, []);
 
-  const num = orientation === "poster_path" ? 4 : 3;
+  const [dimensions, setDimensions] = React.useState({ 
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      })
+    
+}
+
+    window.addEventListener('resize', handleResize)
+
+    return _ => {
+      window.removeEventListener('resize', handleResize)
+}
+  })
+
+  let num;
+
+  if (dimensions.width >= 1200) {
+    num = 4;
+  } else if (dimensions.width >= 800) {
+    num = 3;
+  } else if (dimensions.width >= 768) {
+    num = 2;
+  } else {
+    num = 1;
+  }
 
   const reduceMovies = (acc, cur, index) => {
     const groupIndex = Math.floor(index / num);
