@@ -36,6 +36,7 @@ function Card({ movie, orientation, updateBg }) {
   const urlVideo = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=79b6766f2960d692019a0072eacfd852`;
 
   const [trailerKey, setTrailerKey] = useState("");
+
   useEffect(() => {
     if (orientation === "backdrop_path") {
       fetch(urlVideo)
@@ -47,7 +48,7 @@ function Card({ movie, orientation, updateBg }) {
           console.log(err);
         });
     }
-  }, []);
+  }, [orientation, urlVideo]);
 
   const ytUrl = trailerKey
     ? `https://www.youtube.com/watch?v=${trailerKey}`
