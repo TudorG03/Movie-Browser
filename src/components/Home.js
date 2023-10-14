@@ -36,17 +36,19 @@ function Card({ movie, orientation, updateBg }) {
   const urlVideo = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=79b6766f2960d692019a0072eacfd852`;
 
   const [trailerKey, setTrailerKey] = useState("");
+  useEffect(() => {
+    if (orientation === "backdrop_path") {
+      fetch(urlVideo)
+        .then((response) => response.json())
+        .then((data) => {
+          setTrailerKey(data.results[0].key);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
 
-  if (orientation === "backdrop_path") {
-    fetch(urlVideo)
-      .then((response) => response.json())
-      .then((data) => {
-        setTrailerKey(data.results[0].key);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
   const ytUrl = trailerKey
     ? `https://www.youtube.com/watch?v=${trailerKey}`
     : "https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley";
@@ -109,7 +111,7 @@ function TrendingCarousel({ orientation, movieList }) {
       .then((data) => {
         setTrendingMovies(data.results);
       });
-  }, [trendingMovies, url]);
+  }, []);
 
   const num = orientation === "poster_path" ? 4 : 3;
 
@@ -163,7 +165,12 @@ function TrendingCarousel({ orientation, movieList }) {
           <Button
             variant="primary"
             onClick={onNextClick}
-            style={{ position: "absolute", right: "0", fontWeight: "900", borderRadius: "100px" }}
+            style={{
+              position: "absolute",
+              right: "0",
+              fontWeight: "900",
+              borderRadius: "100px",
+            }}
           >
             <p style={{ fontWeight: "900", margin: ".5em" }}>{">"}</p>
           </Button>
@@ -358,11 +365,13 @@ export default function Home() {
   const [iconicMovies, setIconicMovies] = useState([]);
   const url =
     "https://api.themoviedb.org/3/movie/top_rated?language=en-US&sort_by=vote_average.desc&api_key=79b6766f2960d692019a0072eacfd852";
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      setIconicMovies(data.results);
-    });
+  useEffect(() => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setIconicMovies(data.results);
+      });
+  }, []);
 
   const [loading, setLoading] = useState(false);
   useEffect(() => {
