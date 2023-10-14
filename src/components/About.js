@@ -8,14 +8,18 @@ export default function About() {
       <div className="container">
         <div className="row">
           <div className="col-lg-8 offset-lg-2 my-5">
-            <p className="lead">
-              Non aliquip in eiusmod irure sint non esse eu reprehenderit
-              adipisicing non. Voluptate laborum ullamco sint exercitation. Duis
-              cillum dolor cillum aliquip amet nostrud id fugiat ea sit cillum.
-              Incididunt mollit commodo nulla dolore. Officia laborum fugiat
-              labore Lorem do est ut eiusmod non tempor sint. Id ea ipsum
-              reprehenderit do ad sint deserunt laboris.
-            </p>
+            <h1>Movie Browser- Your Ultimate Movie Database Experience!</h1>
+            <ul>
+              <li>
+                <p className="lead"><em>Vast Movie Collection</em>: Our extensive database is home to thousands of movies, from classic films to the latest blockbusters. You'll find information on cast, crew, plot summaries, trailers, and much more.</p>
+              </li>
+              <li>
+                <p className="lead"><em>User-Friendly Interface</em>: We've designed our app with you in mind. Navigating through our movie database is a breeze, ensuring that you can find the information you need quickly and effortlessly.</p>
+              </li>
+              <li>
+                <p className="lead"><em>News and Updates</em>: Stay up-to-date with the latest movie news, release schedules, and industry insights. We've got your finger on the pulse of the movie world.</p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
