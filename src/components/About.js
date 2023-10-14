@@ -8,7 +8,7 @@ export default function About() {
       <div className="container">
         <div className="row">
           <div className="col-lg-8 offset-lg-2 my-5">
-            <h1>Movie Browser- Your Ultimate Movie Database Experience!</h1>
+            <h1>Movie Browser by Tudor Gheorghiu- Your Ultimate Movie Database Experience!</h1>
             <ul>
               <li>
                 <p className="lead"><em>Vast Movie Collection</em>: Our extensive database is home to thousands of movies, from classic films to the latest blockbusters. You'll find information on cast, crew, plot summaries, trailers, and much more.</p>
