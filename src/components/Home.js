@@ -112,7 +112,7 @@ function TrendingCarousel({ orientation, movieList }) {
       .then((data) => {
         setTrendingMovies(data.results);
       });
-  }, []);
+  }, [url]);
 
   const [dimensions, setDimensions] = React.useState({ 
     height: window.innerHeight,
